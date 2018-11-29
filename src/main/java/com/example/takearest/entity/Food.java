@@ -20,6 +20,8 @@ public class Food {
     @JoinColumn(name="restaurant_id", nullable=false)
     private Restaurant restaurant;
 
+    public Food(){}
+
     public Long getId() {
         return id;
     }
@@ -42,6 +44,14 @@ public class Food {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
 }
