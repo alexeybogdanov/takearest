@@ -1,5 +1,7 @@
 package com.example.takearest.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,8 +16,12 @@ public class Restaurant {
     @Column(name="name")
     private String name;
 
+    @JsonManagedReference
     @OneToMany(mappedBy="restaurant"/*, fetch = FetchType.EAGER*/)
     private Set<Food> foodItems;
+
+    @Column
+    private Long Vote;
 
     public Long getId() {
         return id;
@@ -39,6 +45,14 @@ public class Restaurant {
 
     public void setFoodItems(Set<Food> foodItems) {
         this.foodItems = foodItems;
+    }
+
+    public Long getVote() {
+        return Vote;
+    }
+
+    public void setVote(Long vote) {
+        Vote = vote;
     }
 
     public Restaurant() {

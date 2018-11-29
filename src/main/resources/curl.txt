@@ -1,0 +1,11 @@
+curl -v --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"name":"CURLfood","vote":null}' \
+  http://localhost:8080/api/restaurants
+
+
+//TODO
+curl -v --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"name":"CURLfood","foodItems":[{"id":1,"name":"CURLhamburger","price":3.0},{"id":2,"name":"CURLcola","price":1.99},{"id":3,"name":"CURLpotato","price":2.99}],"vote":null}' \
+  http://localhost:8080/api/restaurants

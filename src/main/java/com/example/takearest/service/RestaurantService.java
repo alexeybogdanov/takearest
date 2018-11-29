@@ -2,6 +2,8 @@ package com.example.takearest.service;
 
 import com.example.takearest.entity.Food;
 import com.example.takearest.entity.Restaurant;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Set;
@@ -12,15 +14,18 @@ import java.util.Set;
  *
  */
 public interface RestaurantService {
-    public List<Restaurant> retrieveRestaurants();
+    List<Restaurant> retrieveRestaurants();
 
-    public Set<Food> getRestaurant(Long restaurantId);
+    Set<Food> getRestaurant(Long restaurantId);
 
-//    public Restaurant getRestaurantFull(Long restaurantId);
+    void saveRestaurant(Restaurant restaurant);
 
-    public void saveRestaurant(Restaurant restaurant);
+    void deleteRestaurant(Long restaurantId);
 
-    public void deleteRestaurant(Long restaurantId);
+    void updateRestaurant(Restaurant restaurant);
 
-    public void updateRestaurant(Restaurant restaurant);
+    void vote(Long restaurantId);
+
+//    @Query("SELECT r FROM RESTAURANT r WHERE r.id=:restaurantId AND m.user.id=:userId")
+//    Restaurant vote(@Param("id") int id, @Param("userId") int userId);
 }

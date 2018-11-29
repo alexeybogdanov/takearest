@@ -1,5 +1,7 @@
 package com.example.takearest.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class Food {
     @Column(name="price")
     private double price;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="restaurant_id", nullable=false)
     private Restaurant restaurant;

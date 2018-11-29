@@ -11,6 +11,7 @@ import com.example.takearest.repository.RestaurantRepository;
 import com.example.takearest.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -34,12 +35,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         return optionalRestaurant.get().getFoodItems();
     }
 
-//    @Override
-//    public Restaurant getRestaurantFull(Long restaurantId) {
-//        restaurantRepository.getAllFull()
-//        return null;
-//    }
-
     public void saveRestaurant(Restaurant restaurant){
         restaurantRepository.save(restaurant);
     }
@@ -49,6 +44,16 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public void updateRestaurant(Restaurant restaurant) {
+        restaurantRepository.save(restaurant);
+    }
+
+    public void vote(Long restaurantId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+        Long currentVote =  restaurant.getVote();
+        if (currentVote == null) {
+            currentVote = 0L;
+        }
+        restaurant.setVote(++currentVote);
         restaurantRepository.save(restaurant);
     }
 }

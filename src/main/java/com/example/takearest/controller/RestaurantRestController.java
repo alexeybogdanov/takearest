@@ -1,19 +1,15 @@
 package com.example.takearest.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.example.takearest.entity.Food;
 import com.example.takearest.entity.Restaurant;
 import com.example.takearest.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -42,11 +38,16 @@ public class RestaurantRestController {
         return restaurantService.getRestaurant(restaurantId);
     }
 
-//    @PostMapping("/api/employees")
-//    public void saveEmployee(Employee employee){
-//        restaurantService.saveEmployee(employee);
-//        System.out.println("Employee Saved Successfully");
-//    }
+    @PostMapping("/api/restaurants")
+    public void saveRestaurant(@RequestBody Map<String, String> body){
+        String name = body.get("name");
+        String foodItems = body.get("foodItems");
+        Restaurant restaurant = new Restaurant();
+        restaurant.setName(name);
+//        restaurant.setFoodItems(new HashSet<String>(foodItems));
+        restaurantService.saveRestaurant(restaurant);
+        System.out.println("Restaurant Saved Successfully");
+    }
 //
 //    @DeleteMapping("/api/employees/{employeeId}")
 //    public void deleteEmployee(@PathVariable(name="employeeId")Long employeeId){
