@@ -18,7 +18,7 @@ public class Restaurant {
 
     @JsonManagedReference
     @OneToMany(mappedBy="restaurant"/*, fetch = FetchType.EAGER*/)
-    private Set<Food> foodItems;
+    private Set<Meal> meals;
 
     @Column
     private Long Vote;
@@ -39,12 +39,12 @@ public class Restaurant {
         this.name = name;
     }
 
-    public Set<Food> getFoodItems() {
-        return foodItems;
+    public Set<Meal> getMeals() {
+        return meals;
     }
 
-    public void setFoodItems(Set<Food> foodItems) {
-        this.foodItems = foodItems;
+    public void setMeals(Set<Meal> foodItems) {
+        this.meals = foodItems;
     }
 
     public Long getVote() {

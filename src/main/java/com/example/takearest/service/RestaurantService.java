@@ -1,9 +1,7 @@
 package com.example.takearest.service;
 
-import com.example.takearest.entity.Food;
+import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Set;
@@ -16,7 +14,7 @@ import java.util.Set;
 public interface RestaurantService {
     List<Restaurant> retrieveRestaurants();
 
-    Set<Food> getRestaurant(Long restaurantId);
+    Set<Meal> getRestaurantMeals(Long restaurantId);
 
     void saveRestaurant(Restaurant restaurant);
 

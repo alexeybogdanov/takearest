@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name="food")
-public class Food {
+@Table(name="meal")
+public class Meal {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Food {
     @JoinColumn(name="restaurant_id", nullable=false)
     private Restaurant restaurant;
 
-    public Food(){}
+    public Meal(){}
 
     public Long getId() {
         return id;

@@ -1,17 +1,15 @@
 package com.example.takearest.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import com.example.takearest.entity.Food;
+import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
 import com.example.takearest.repository.RestaurantRepository;
 import com.example.takearest.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -28,11 +26,10 @@ public class RestaurantServiceImpl implements RestaurantService {
         return (List<Restaurant>) restaurants;
     }
 
-    public Set<Food> getRestaurant(Long restaurantId) {
+    public Set<Meal> getRestaurantMeals(Long restaurantId) {
         Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(restaurantId);
 
-
-        return optionalRestaurant.get().getFoodItems();
+        return optionalRestaurant.get().getMeals();
     }
 
     public void saveRestaurant(Restaurant restaurant){

@@ -1,15 +1,18 @@
 package com.example.takearest.controller;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.example.takearest.entity.Food;
+import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
 import com.example.takearest.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -33,15 +36,15 @@ public class RestaurantRestController {
     }
 
     @GetMapping("/api/restaurant/{restaurantId}")
-    public Set<Food> getRestaurant(@PathVariable(name="restaurantId")Long restaurantId) {
+    public Set<Meal> getRestaurantMeals(@PathVariable(name="restaurantId")Long restaurantId) {
 
-        return restaurantService.getRestaurant(restaurantId);
+        return restaurantService.getRestaurantMeals(restaurantId);
     }
 
     @PostMapping("/api/restaurants")
     public void saveRestaurant(@RequestBody Map<String, String> body){
         String name = body.get("name");
-        String foodItems = body.get("foodItems");
+//        String foodItems =  body.get("foodItems");
         Restaurant restaurant = new Restaurant();
         restaurant.setName(name);
 //        restaurant.setFoodItems(new HashSet<String>(foodItems));
