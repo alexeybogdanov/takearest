@@ -21,22 +21,28 @@ public class RestaurantServiceImpl implements RestaurantService {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public List<Restaurant> retrieveRestaurants() {
+    public List<Restaurant> retrieveAll() {
         Iterable<Restaurant> restaurants = restaurantRepository.findAll();
         return (List<Restaurant>) restaurants;
     }
 
-    public Set<Meal> getRestaurantMeals(Long restaurantId) {
-        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(restaurantId);
+//    public Set<Meal> getMeals(Long restaurantId) {
+//        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(restaurantId);
+//
+//        return optionalRestaurant.get().getMeals();
+//    }
 
-        return optionalRestaurant.get().getMeals();
+    @Override
+    public Restaurant getById(Long restaurantId) {
+        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(restaurantId);
+        return optionalRestaurant.get();
     }
 
-    public void saveRestaurant(Restaurant restaurant){
+    public void save(Restaurant restaurant){
         restaurantRepository.save(restaurant);
     }
 
-    public void deleteRestaurant(Long restaurantId){
+    public void delete(Long restaurantId){
         restaurantRepository.deleteById(restaurantId);
     }
 

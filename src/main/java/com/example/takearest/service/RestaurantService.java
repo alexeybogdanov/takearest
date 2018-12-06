@@ -12,15 +12,17 @@ import java.util.Set;
  *
  */
 public interface RestaurantService {
-    List<Restaurant> retrieveRestaurants();
+    List<Restaurant> retrieveAll();
 
-    Set<Meal> getRestaurantMeals(Long restaurantId);
+    //Set<Meal> getMeals(Long restaurantId);
 
-    void saveRestaurant(Restaurant restaurant);
+    Restaurant getById(Long restaurantId);
 
-    void deleteRestaurant(Long restaurantId);
+    void save(Restaurant restaurant);
 
-    void updateRestaurant(Restaurant restaurant);
+    void delete(Long restaurantId);
+
+    //void updateRestaurant(Restaurant restaurant);
 
     void vote(Long restaurantId);
 

@@ -14,11 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-/**
- * @author JavaSolutionsGuide
- *
- */
 @RestController
 public class RestaurantRestController {
 
@@ -30,25 +25,27 @@ public class RestaurantRestController {
     }
 
     @GetMapping("/api/restaurants")
-    public List<Restaurant> getEmployees() {
-        List<Restaurant> restaurants = restaurantService.retrieveRestaurants();
-        return restaurants;
+    public List<Restaurant> retrieveAll() {
+        return restaurantService.retrieveAll();
     }
 
-    @GetMapping("/api/restaurant/{restaurantId}")
-    public Set<Meal> getRestaurantMeals(@PathVariable(name="restaurantId")Long restaurantId) {
+//    @GetMapping("/api/restaurants/{restaurantId}")
+//    public Set<Meal> getRestaurantMeals(@PathVariable(name="restaurantId")Long restaurantId) {
+//
+//        return restaurantService.getMeals(restaurantId);
+//    }
 
-        return restaurantService.getRestaurantMeals(restaurantId);
+    @GetMapping("/api/restaurants/{restaurantId}")
+    public Restaurant getById(@PathVariable(name="restaurantId")Long restaurantId) {
+        return restaurantService.getById(restaurantId);
     }
 
     @PostMapping("/api/restaurants")
     public void saveRestaurant(@RequestBody Map<String, String> body){
         String name = body.get("name");
-//        String foodItems =  body.get("foodItems");
         Restaurant restaurant = new Restaurant();
         restaurant.setName(name);
-//        restaurant.setFoodItems(new HashSet<String>(foodItems));
-        restaurantService.saveRestaurant(restaurant);
+        restaurantService.save(restaurant);
         System.out.println("Restaurant Saved Successfully");
     }
 //
