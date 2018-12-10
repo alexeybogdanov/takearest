@@ -1,11 +1,17 @@
+//create restaurant
 curl -v --header "Content-Type: application/json" \
   --request POST \
   --data '{"name":"CURLfood","vote":null}' \
   http://localhost:8080/api/restaurants
 
 
-//TODO
+//create food for restaurant
 curl -v --header "Content-Type: application/json" \
   --request POST \
-  --data '{"name":"CURLfood","foodItems":[{"id":1,"name":"CURLhamburger","price":3.0},{"id":2,"name":"CURLcola","price":1.99},{"id":3,"name":"CURLpotato","price":2.99}],"vote":null}' \
-  http://localhost:8080/api/restaurants
+  --data '[{"id":1,"name":"CURLhamburger","price":3.0,"restaurant_id":3},{"id":2,"name":"CURLcola","price":1.99,"restaurant_id":3},{"id":3,"name":"CURLpotato","price":2.99,"restaurant_id":3}]' \
+  http://localhost:8080/api/meals
+
+  curl -v --header "Content-Type: application/json" \
+    --request POST \
+    --data '{"id":1,"name":"CURLhamburger","price":3.0,"restaurant_id":3}' \
+    http://localhost:8080/api/meals
