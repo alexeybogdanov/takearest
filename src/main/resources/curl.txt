@@ -1,3 +1,5 @@
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" http://localhost:8080/api/restaurants
+
 //create restaurant
 curl -v --header "Content-Type: application/json" \
   --request POST \
