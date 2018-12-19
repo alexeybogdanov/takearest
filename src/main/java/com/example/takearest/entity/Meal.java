@@ -3,6 +3,7 @@ package com.example.takearest.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="meal")
@@ -17,6 +18,9 @@ public class Meal {
 
     @Column(name="price")
     private double price;
+
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
 
     @JsonBackReference
     @ManyToOne
@@ -57,4 +61,11 @@ public class Meal {
         this.restaurant = restaurant;
     }
 
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

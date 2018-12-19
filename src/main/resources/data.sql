@@ -1,9 +1,9 @@
-CREATE TABLE USERS(
+CREATE TABLE IF NOT EXISTS  USERS(
       username varchar_ignorecase(50) not null primary key,
       password varchar_ignorecase(255) not null,
       enabled boolean not null);
 
-CREATE TABLE AUTHORITIES (
+CREATE TABLE IF NOT EXISTS AUTHORITIES (
       username varchar_ignorecase(60) not null,
       authority varchar_ignorecase(60) not null,
       constraint fk_authorities_users foreign key(username) references users(username));

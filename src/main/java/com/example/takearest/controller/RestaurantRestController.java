@@ -41,12 +41,21 @@ public class RestaurantRestController {
     }
 
     @PostMapping("/api/restaurants")
-    public void saveRestaurant(@RequestBody Map<String, String> body){
+    public void save(@RequestBody Map<String, String> body){
         String name = body.get("name");
         Restaurant restaurant = new Restaurant();
         restaurant.setName(name);
         restaurantService.save(restaurant);
         System.out.println("Restaurant Saved Successfully");
+    }
+
+    @PostMapping("/api/restaurants/vote")
+    public void vote(@RequestBody Map<String, String> body){
+        Long restaurantId = Long.valueOf(body.get("id"));
+//        Restaurant restaurant = new Restaurant();
+//        restaurant.setName(name);
+        restaurantService.vote(restaurantId);
+        System.out.println("Voted for Restaurant Successfully " + restaurantId + " " + restaurantService.getById(restaurantId).getName());
     }
 //
 //    @DeleteMapping("/api/employees/{employeeId}")

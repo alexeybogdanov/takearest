@@ -18,13 +18,17 @@ public interface RestaurantService {
 
     Restaurant getById(Long restaurantId);
 
+    Long getByName(String name);
+
     void save(Restaurant restaurant);
 
     void delete(Long restaurantId);
 
+    void vote(Long restaurantId);
+
     //void updateRestaurant(Restaurant restaurant);
 
-    void vote(Long restaurantId);
+
 
 //    @Query("SELECT r FROM RESTAURANT r WHERE r.id=:restaurantId AND m.user.id=:userId")
 //    Restaurant vote(@Param("id") int id, @Param("userId") int userId);

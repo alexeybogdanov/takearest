@@ -27,23 +27,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/h2/**").permitAll();
+//        http.authorizeRequests().antMatchers("/h2/**").permitAll();
+        http.authorizeRequests().antMatchers("/").permitAll();
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.authorizeRequests();
-//
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic()
-//                .authenticationEntryPoint( new BasicAuthenticationEntryPoint());
 
-        http.authorizeRequests()
-                .antMatchers("/")
-                .hasAnyRole("USER","ADMIN").anyRequest()
-                .authenticated().and().httpBasic()
-                .realmName("Takearest");;
 
-        http.csrf().disable();
+
+//        http.authorizeRequests()
+//                .antMatchers("/")
+//                .hasAnyRole("USER","ADMIN").anyRequest()
+//                .authenticated().and().httpBasic()
+//                .realmName("Takearest");;
+
 
     }
 

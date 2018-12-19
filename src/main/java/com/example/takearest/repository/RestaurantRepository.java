@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RestaurantRepository extends CrudRepository<Restaurant,Long> {
 
+    Long findByName(String name);
 }

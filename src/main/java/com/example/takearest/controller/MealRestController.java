@@ -7,6 +7,7 @@ import com.example.takearest.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 @RestController
 public class MealRestController {
@@ -28,14 +29,16 @@ public class MealRestController {
     }
 
     @PostMapping("/api/meals")
-    public void saveRestaurant(@RequestBody Map<String, String> body){
+    public void save(@RequestBody Map<String, String> body){
         String name = body.get("name");
         Long restaurant_id = Long.valueOf(body.get("restaurant_id"));
         Double price = Double.valueOf(body.get("price"));
+        LocalDateTime timestamp = LocalDateTime.now();
 
         Meal meal = new Meal();
         meal.setName(name);
         meal.setPrice(price);
+        meal.setTimestamp(timestamp);
         meal.setRestaurant(restaurantService.getById(restaurant_id));
         mealService.save(meal);
         System.out.println("Meal Saved Successfully");

@@ -1,6 +1,5 @@
 package com.example.takearest.service.impl;
 
-import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
 import com.example.takearest.repository.RestaurantRepository;
 import com.example.takearest.service.RestaurantService;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -38,6 +36,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         return optionalRestaurant.get();
     }
 
+    @Override
+    public Long getByName(String name) {
+        return restaurantRepository.findByName(name);
+    }
+
     public void save(Restaurant restaurant){
         restaurantRepository.save(restaurant);
     }
@@ -51,12 +54,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public void vote(Long restaurantId) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
-        Long currentVote =  restaurant.getVote();
-        if (currentVote == null) {
-            currentVote = 0L;
-        }
-        restaurant.setVote(++currentVote);
-        restaurantRepository.save(restaurant);
+//        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+//        Integer currentVote =  restaurant.getVote().getValue();
+//        if (currentVote.equals(null)) {
+//            currentVote = 0;
+//        }
+//        Vote vote = new Vote();
+//        vote.setValue(currentVote);
+//        restaurant.setVote(vote);
+//        restaurantRepository.save(restaurant);
     }
 }
