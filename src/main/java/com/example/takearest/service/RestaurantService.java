@@ -24,7 +24,7 @@ public interface RestaurantService {
 
     void delete(Long restaurantId);
 
-    void vote(Long restaurantId);
+    void vote(Long restaurantId, String username);
 
     //void updateRestaurant(Restaurant restaurant);
 

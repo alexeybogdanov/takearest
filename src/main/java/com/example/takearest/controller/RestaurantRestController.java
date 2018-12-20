@@ -54,7 +54,8 @@ public class RestaurantRestController {
         Long restaurantId = Long.valueOf(body.get("id"));
 //        Restaurant restaurant = new Restaurant();
 //        restaurant.setName(name);
-        restaurantService.vote(restaurantId);
+        //TODO  logged userID
+        restaurantService.vote(restaurantId, "alex");
         System.out.println("Voted for Restaurant Successfully " + restaurantId + " " + restaurantService.getById(restaurantId).getName());
     }
 //

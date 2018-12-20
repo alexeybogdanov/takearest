@@ -1,11 +1,16 @@
 package com.example.takearest.service.impl;
 
 import com.example.takearest.entity.Restaurant;
+import com.example.takearest.entity.User;
+import com.example.takearest.entity.Vote;
 import com.example.takearest.repository.RestaurantRepository;
+import com.example.takearest.repository.UserRepository;
+import com.example.takearest.repository.VoteRepository;
 import com.example.takearest.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +20,17 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    public void setRestaurantRepository(RestaurantRepository restaurantRepository) {
+    @Autowired
+    private VoteRepository voteRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public void setRestaurantRepository(RestaurantRepository restaurantRepository, VoteRepository voteRepository,
+                                        UserRepository userRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.voteRepository = voteRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Restaurant> retrieveAll() {
@@ -53,15 +67,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurantRepository.save(restaurant);
     }
 
-    public void vote(Long restaurantId) {
-//        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
-//        Integer currentVote =  restaurant.getVote().getValue();
-//        if (currentVote.equals(null)) {
-//            currentVote = 0;
-//        }
-//        Vote vote = new Vote();
-//        vote.setValue(currentVote);
-//        restaurant.setVote(vote);
-//        restaurantRepository.save(restaurant);
+    public void vote(Long restaurantId, String username) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+        LocalDateTime time = LocalDateTime.now();
+        User user = userRepository.getByUsername(username);
+        Vote vote = new Vote();
+        vote.setDate(time);
+        vote.setRestaurant(restaurant);
+        vote.setUser(user);
+        voteRepository.save(vote);
+
+
     }
 }

@@ -20,6 +20,17 @@ public class Restaurant {
     @OneToMany(mappedBy="restaurant"/*, fetch = FetchType.EAGER*/)
     private Set<Meal> meals;
 
+//    public Vote getVote() {
+//        return vote;
+//    }
+//
+//    public void setVote(Vote vote) {
+//        this.vote = vote;
+//    }
+//
+//    private Vote vote;
+
+
 
     public Long getId() {
         return id;
