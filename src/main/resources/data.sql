@@ -22,10 +22,10 @@ INSERT INTO RESTAURANT(ID, NAME) VALUES
 (1, 'MacDac'),
 (2, 'Shawerma');
 
-INSERT INTO MEAL(ID, NAME, PRICE, RESTAURANT_ID) VALUES
-(1, 'cola', 1.99, 1),
-(2, 'hamburger', 3.0, 1),
-(3, 'potato', 2.99, 1),
-(4, 'cola-light', 1.99, 2),
-(5, 'hamburger-light', 3.0, 2),
-(6, 'potato-light', 2.99, 2);
+INSERT INTO MEAL(ID, NAME, PRICE, TIMESTAMP, RESTAURANT_ID) VALUES
+(1, 'cola', 1.99, '2018-12-23 21:11:21', 1),
+(2, 'hamburger', 3.0, '2018-12-23 21:11:21', 1),
+(3, 'potato', 2.99, '2018-12-23 21:11:21', 1),
+(4, 'cola-light', 1.99, '2018-12-23 21:11:21', 2),
+(5, 'hamburger-light', 3.0, '2018-12-23 21:11:21', 2),
+(6, 'potato-light', 2.99, '2018-12-23 21:11:21', 2);

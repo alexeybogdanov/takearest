@@ -1,14 +1,14 @@
 curl -H "Authorization: Basic YWxleDoxMjM0NQ==" http://localhost:8080/api/restaurants
 
 //create restaurant
-curl -v --header "Content-Type: application/json" \
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" \
   --request POST \
   --data '{"name":"CURLfood","vote":null}' \
   http://localhost:8080/api/restaurants
 
 
 //create food-1 for restaurant
-curl -v --header "Content-Type: application/json" \
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" \
   --request POST \
   --data '{"name":"CURLhamburger","price":3.0,"restaurant_id":3}' \
   http://localhost:8080/api/meals
@@ -26,9 +26,15 @@ curl -v --header "Content-Type: application/json" \
   http://localhost:8080/api/meals
 
 
-//vote for restaurant
+//vote for restaurant without AUTH
 curl -v --header "Content-Type: application/json" \
   --request POST \
   --data '{"id":1}' \
   http://localhost:8080/api/restaurants/vote
 
+//vote for restaurant
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" --request POST --data '{"id":1}' http://localhost:8080/api/restaurants/vote
+
+
+//
+SELECT NAME, PRICE FROM MEAL WHERE RESTAURANT_ID=1 and TIMESTAMP like '2018%'

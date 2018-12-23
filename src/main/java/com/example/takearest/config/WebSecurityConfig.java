@@ -34,11 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-//        http.authorizeRequests()
-//                .antMatchers("/")
-//                .hasAnyRole("USER","ADMIN").anyRequest()
-//                .authenticated().and().httpBasic()
-//                .realmName("Takearest");;
+        http.authorizeRequests()
+                .antMatchers("/")
+                .hasAnyRole("USER","ADMIN").anyRequest()
+                .authenticated().and().httpBasic()
+                .realmName("Takearest");;
 
 
     }

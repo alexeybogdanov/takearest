@@ -1,18 +1,13 @@
 package com.example.takearest.controller;
 
-import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
-import com.example.takearest.service.RestaurantService;
+import com.example.takearest.service.api.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 public class RestaurantRestController {
@@ -50,13 +45,16 @@ public class RestaurantRestController {
     }
 
     @PostMapping("/api/restaurants/vote")
-    public void vote(@RequestBody Map<String, String> body){
+    @ResponseBody
+    public void vote(@RequestBody Map<String, String> body, Principal principal){
         Long restaurantId = Long.valueOf(body.get("id"));
 //        Restaurant restaurant = new Restaurant();
 //        restaurant.setName(name);
         //TODO  logged userID
-        restaurantService.vote(restaurantId, "alex");
-        System.out.println("Voted for Restaurant Successfully " + restaurantId + " " + restaurantService.getById(restaurantId).getName());
+
+        restaurantService.vote(restaurantId, principal.getName());
+        System.out.println("Voted for Restaurant Successfully " + restaurantId + " " + restaurantService.getById(restaurantId).getName()
+         + " By User " + principal.getName());
     }
 //
 //    @DeleteMapping("/api/employees/{employeeId}")

@@ -2,7 +2,7 @@ package com.example.takearest.service.impl;
 
 import com.example.takearest.entity.Meal;
 import com.example.takearest.repository.MealRepository;
-import com.example.takearest.service.MealService;
+import com.example.takearest.service.api.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,8 @@
 package com.example.takearest.controller;
 
 import com.example.takearest.entity.Meal;
-import com.example.takearest.entity.Restaurant;
-import com.example.takearest.service.MealService;
-import com.example.takearest.service.RestaurantService;
+import com.example.takearest.service.api.MealService;
+import com.example.takearest.service.api.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,11 +34,13 @@ public class MealRestController {
         Double price = Double.valueOf(body.get("price"));
         LocalDateTime timestamp = LocalDateTime.now();
 
-        Meal meal = new Meal();
-        meal.setName(name);
-        meal.setPrice(price);
-        meal.setTimestamp(timestamp);
-        meal.setRestaurant(restaurantService.getById(restaurant_id));
+        Meal meal = Meal.builder()
+                .name(name)
+                .price(price)
+                .timestamp(timestamp)
+                .restaurant(restaurantService.getById(restaurant_id))
+                .build();
+
         mealService.save(meal);
         System.out.println("Meal Saved Successfully");
     }

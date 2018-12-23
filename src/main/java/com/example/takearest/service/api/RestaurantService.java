@@ -1,4 +1,4 @@
-package com.example.takearest.service;
+package com.example.takearest.service.api;
 
 import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;

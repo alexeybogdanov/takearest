@@ -1,14 +1,25 @@
 package com.example.takearest.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "vote", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name", "vote_date"}, name = "unique_vote")})
 public class Vote {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     long id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -23,42 +34,6 @@ public class Vote {
 
     @NotNull
     @Column(name = "vote_date", nullable = false)
-    private LocalDateTime date;
-
-    public Vote() {
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    private LocalDate date;
 
 }

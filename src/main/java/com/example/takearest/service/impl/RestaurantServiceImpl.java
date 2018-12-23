@@ -6,11 +6,13 @@ import com.example.takearest.entity.Vote;
 import com.example.takearest.repository.RestaurantRepository;
 import com.example.takearest.repository.UserRepository;
 import com.example.takearest.repository.VoteRepository;
-import com.example.takearest.service.RestaurantService;
+import com.example.takearest.service.api.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,14 +71,23 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     public void vote(Long restaurantId, String username) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
-        LocalDateTime time = LocalDateTime.now();
-        User user = userRepository.getByUsername(username);
-        Vote vote = new Vote();
-        vote.setDate(time);
-        vote.setRestaurant(restaurant);
-        vote.setUser(user);
-        voteRepository.save(vote);
 
+        LocalDateTime voteTime = LocalDateTime.now();
+        LocalTime tooLate = LocalTime.of(23,59,00);
+
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        //String formatDateTime = voteTime.format(formatter);
+
+        // if time is before 11  user can vote
+        System.out.println("VOTE HOUR "   + voteTime.getHour());
+        if (voteTime.toLocalTime().isBefore(tooLate) ) {
+            User user = userRepository.getByUsername(username);
+            Vote vote = new Vote();
+            vote.setDate(voteTime.toLocalDate());
+            vote.setRestaurant(restaurant);
+            vote.setUser(user);
+            voteRepository.save(vote);
+        } else System.out.println("too Late" );
 
     }
 }
