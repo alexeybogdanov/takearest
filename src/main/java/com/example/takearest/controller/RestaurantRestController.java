@@ -15,20 +15,11 @@ public class RestaurantRestController {
     @Autowired
     private RestaurantService restaurantService;
 
-    public void setRestaurantService(RestaurantService restaurantService) {
-        this.restaurantService = restaurantService;
-    }
-
     @GetMapping("/api/restaurants")
     public List<Restaurant> retrieveAll() {
         return restaurantService.retrieveAll();
     }
 
-//    @GetMapping("/api/restaurants/{restaurantId}")
-//    public Set<Meal> getRestaurantMeals(@PathVariable(name="restaurantId")Long restaurantId) {
-//
-//        return restaurantService.getMeals(restaurantId);
-//    }
 
     @GetMapping("/api/restaurants/{restaurantId}")
     public Restaurant getById(@PathVariable(name="restaurantId")Long restaurantId) {

@@ -7,16 +7,17 @@ import com.example.takearest.repository.RestaurantRepository;
 import com.example.takearest.repository.UserRepository;
 import com.example.takearest.repository.VoteRepository;
 import com.example.takearest.service.api.RestaurantService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class RestaurantServiceImpl implements RestaurantService {
 
     @Autowired
@@ -87,7 +88,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             vote.setRestaurant(restaurant);
             vote.setUser(user);
             voteRepository.save(vote);
-        } else System.out.println("too Late" );
+        } else log.info("too Late" );
 
     }
 }

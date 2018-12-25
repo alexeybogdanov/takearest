@@ -1,12 +1,10 @@
 package com.example.takearest.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,12 +17,13 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name="name")
     private String name;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy="restaurant"/*, fetch = FetchType.EAGER*/)
-    private Set<Meal> meals;
+    @JsonManagedReference
+    private List<Meal> meals;
 }

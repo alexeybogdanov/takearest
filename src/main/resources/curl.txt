@@ -3,7 +3,7 @@ curl -H "Authorization: Basic YWxleDoxMjM0NQ==" http://localhost:8080/api/restau
 //create restaurant
 curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" \
   --request POST \
-  --data '{"name":"CURLfood","vote":null}' \
+  --data '{"name":"CURLfood"}' \
   http://localhost:8080/api/restaurants
 
 

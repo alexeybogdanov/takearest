@@ -19,7 +19,7 @@ public class Meal {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name="name")
     private String name;
@@ -30,9 +30,9 @@ public class Meal {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="restaurant_id", nullable=false)
+    @JsonBackReference
     private Restaurant restaurant;
 
 }
