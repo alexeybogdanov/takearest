@@ -4,6 +4,7 @@ import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -16,11 +17,11 @@ public interface RestaurantService {
 
     //Set<Meal> getMeals(Long restaurantId);
 
-    Restaurant getById(Long restaurantId);
+    Optional<Restaurant> getById(Long restaurantId);
 
     Long getByName(String name);
 
-    void save(Restaurant restaurant);
+    Restaurant save(Restaurant restaurant);
 
     void delete(Long restaurantId);
 

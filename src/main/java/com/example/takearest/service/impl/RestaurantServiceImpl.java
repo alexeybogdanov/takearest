@@ -48,9 +48,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 //    }
 
     @Override
-    public Restaurant getById(Long restaurantId) {
-        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(restaurantId);
-        return optionalRestaurant.get();
+    public Optional<Restaurant> getById(Long restaurantId) {
+         return restaurantRepository.findById(restaurantId);
     }
 
     @Override
@@ -58,8 +57,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.findByName(name);
     }
 
-    public void save(Restaurant restaurant){
-        restaurantRepository.save(restaurant);
+    public Restaurant save(Restaurant restaurant){
+        return restaurantRepository.save(restaurant);
     }
 
     public void delete(Long restaurantId){

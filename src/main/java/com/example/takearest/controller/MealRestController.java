@@ -17,10 +17,6 @@ public class MealRestController {
     @Autowired
     private RestaurantService restaurantService;
 
-    public void setMealService(MealService mealService) {
-        this.mealService = mealService;
-    }
-
     @DeleteMapping("/api/meals/{mealId}")
     public void delete(@PathVariable(name = "mealId") Long mealId) {
         mealService.delete(mealId);
@@ -34,11 +30,12 @@ public class MealRestController {
         Double price = Double.valueOf(body.get("price"));
         LocalDateTime timestamp = LocalDateTime.now();
 
+
         Meal meal = Meal.builder()
                 .name(name)
                 .price(price)
                 .timestamp(timestamp)
-                .restaurant(restaurantService.getById(restaurant_id))
+                .restaurant(restaurantService.getById(restaurant_id).get())
                 .build();
 
         mealService.save(meal);

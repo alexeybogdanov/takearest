@@ -2,6 +2,8 @@ package com.example.takearest.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,7 +25,8 @@ public class Restaurant {
     private String name;
 
 
-    @OneToMany(mappedBy="restaurant"/*, fetch = FetchType.EAGER*/)
+    @OneToMany(mappedBy="restaurant")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<Meal> meals;
 }

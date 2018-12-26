@@ -33,8 +33,13 @@ curl -v --header "Content-Type: application/json" \
   http://localhost:8080/api/restaurants/vote
 
 //vote for restaurant
-curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" --request POST --data '{"id":1}' http://localhost:8080/api/restaurants/vote
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/restaurants/vote/1 -H 'Content-type:application/json'
 
+//Update restaurant
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/restaurants/1 -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee"}'
+
+//Delete restaurant
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X DELETE localhost:8080/api/restaurants/3
 
 //
 SELECT NAME, PRICE FROM MEAL WHERE RESTAURANT_ID=1 and TIMESTAMP like '2018%'

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class RestaurantRestController {
@@ -20,48 +19,37 @@ public class RestaurantRestController {
         return restaurantService.retrieveAll();
     }
 
-
-    @GetMapping("/api/restaurants/{restaurantId}")
-    public Restaurant getById(@PathVariable(name="restaurantId")Long restaurantId) {
-        return restaurantService.getById(restaurantId);
-    }
-
     @PostMapping("/api/restaurants")
-    public void save(@RequestBody Map<String, String> body){
-        String name = body.get("name");
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName(name);
+    public void save(@RequestBody Restaurant restaurant) {
         restaurantService.save(restaurant);
-        System.out.println("Restaurant Saved Successfully");
     }
 
-    @PostMapping("/api/restaurants/vote")
-    @ResponseBody
-    public void vote(@RequestBody Map<String, String> body, Principal principal){
-        Long restaurantId = Long.valueOf(body.get("id"));
-//        Restaurant restaurant = new Restaurant();
-//        restaurant.setName(name);
-        //TODO  logged userID
-
-        restaurantService.vote(restaurantId, principal.getName());
-        System.out.println("Voted for Restaurant Successfully " + restaurantId + " " + restaurantService.getById(restaurantId).getName()
-         + " By User " + principal.getName());
+    @GetMapping("/api/restaurants/{id}")
+    public Restaurant getById(@PathVariable long id) {
+        return restaurantService.getById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
     }
-//
-//    @DeleteMapping("/api/employees/{employeeId}")
-//    public void deleteEmployee(@PathVariable(name="employeeId")Long employeeId){
-//        restaurantService.deleteEmployee(employeeId);
-//        System.out.println("Employee Deleted Successfully");
-//    }
-//
-//    @PutMapping("/api/employees/{employeeId}")
-//    public void updateEmployee(@RequestBody Employee employee,
-//                               @PathVariable(name="employeeId")Long employeeId){
-//        Employee emp = restaurantService.getEmployee(employeeId);
-//        if(emp != null){
-//            restaurantService.updateEmployee(employee);
-//        }
-//
-//    }
+
+
+    @PutMapping("/api/restaurants/vote/{id}")
+    public void vote(@PathVariable long id, Principal principal) {
+        restaurantService.vote(id, principal.getName());
+    }
+
+    @PutMapping("/api/restaurants/{id}")
+    public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable long id) {
+        return restaurantService.getById(id)
+                .map(restaurant -> {
+                    restaurant.setName(newRestaurant.getName());
+                    return restaurantService.save(restaurant);
+                })
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
+
+    }
+
+    @DeleteMapping("/api/restaurants/{id}")
+    public void delete(@PathVariable long id) {
+        restaurantService.delete(id);
+    }
 
 }
