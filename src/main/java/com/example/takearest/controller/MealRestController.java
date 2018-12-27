@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+
 @RestController
 public class MealRestController {
 
@@ -17,10 +18,9 @@ public class MealRestController {
     @Autowired
     private RestaurantService restaurantService;
 
-    @DeleteMapping("/api/meals/{mealId}")
-    public void delete(@PathVariable(name = "mealId") Long mealId) {
-        mealService.delete(mealId);
-        System.out.println("Meal Deleted Successfully");
+    @DeleteMapping("/api/meals/{id}")
+    public void delete(@PathVariable long id) {
+        mealService.delete(id);
     }
 
     @PostMapping("/api/meals")

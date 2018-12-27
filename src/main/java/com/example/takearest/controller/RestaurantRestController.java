@@ -31,7 +31,7 @@ public class RestaurantRestController {
     }
 
 
-    @PutMapping("/api/restaurants/vote/{id}")
+    @PostMapping("/api/restaurants/vote/{id}")
     public void vote(@PathVariable long id, Principal principal) {
         restaurantService.vote(id, principal.getName());
     }

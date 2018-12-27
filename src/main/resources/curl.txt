@@ -10,7 +10,7 @@ curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: applicat
 //create food-1 for restaurant
 curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" \
   --request POST \
-  --data '{"name":"CURLhamburger","price":3.0,"restaurant_id":3}' \
+  --data '{"name":"CURLhamburger","price":3.0,"restaurant":3}' \
   http://localhost:8080/api/meals
 
 //create food-2 for restaurant
@@ -33,7 +33,7 @@ curl -v --header "Content-Type: application/json" \
   http://localhost:8080/api/restaurants/vote
 
 //vote for restaurant
-curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/restaurants/vote/1 -H 'Content-type:application/json'
+curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X POST localhost:8080/api/restaurants/vote/1 -H 'Content-type:application/json'
 
 //Update restaurant
 curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/restaurants/1 -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee"}'
