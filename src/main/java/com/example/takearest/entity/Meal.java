@@ -1,19 +1,18 @@
 package com.example.takearest.entity;
 
+import com.example.takearest.to.MealTo;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude="restaurant")
 @Table(name="meal")
 public class Meal {
 
@@ -28,11 +27,22 @@ public class Meal {
     private double price;
 
     @Column(name = "timestamp")
-    private LocalDateTime timestamp;
+    private LocalDate timestamp;
 
     @ManyToOne
     @JoinColumn(name="restaurant_id", nullable=false)
     @JsonBackReference
     private Restaurant restaurant;
+
+    public Meal(MealTo mealTo,LocalDate timestamp, Restaurant restaurant) {
+        this.name = mealTo.getName();
+        this.price = mealTo.getPrice();
+        this.timestamp = timestamp;
+        this.restaurant = restaurant;
+    }
+
+
+
+
 
 }

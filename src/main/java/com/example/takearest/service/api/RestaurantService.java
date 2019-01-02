@@ -2,35 +2,25 @@ package com.example.takearest.service.api;
 
 import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-
-/**
- * @author JavaSolutionsGuide
- *
- */
 public interface RestaurantService {
     List<Restaurant> retrieveAll();
 
-    //Set<Meal> getMeals(Long restaurantId);
+//    List<Meal> getMealsByRestaurant(long restaurantId);
 
-    Optional<Restaurant> getById(Long restaurantId);
+    Optional<Restaurant> getById(long restaurantId);
 
-    Long getByName(String name);
+    Restaurant getByName(String name);
 
     Restaurant save(Restaurant restaurant);
 
-    void delete(Long restaurantId);
+    void delete(long restaurantId);
 
-    void vote(Long restaurantId, String username);
-
-    //void updateRestaurant(Restaurant restaurant);
-
-
-
-//    @Query("SELECT r FROM RESTAURANT r WHERE r.id=:restaurantId AND m.user.id=:userId")
-//    Restaurant vote(@Param("id") int id, @Param("userId") int userId);
 }

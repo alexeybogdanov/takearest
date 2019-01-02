@@ -1,4 +1,4 @@
-package com.example.takearest.controller;
+package com.example.takearest.exception;
 
 
 import org.springframework.http.HttpStatus;

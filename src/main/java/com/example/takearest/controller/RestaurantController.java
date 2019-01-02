@@ -1,42 +1,38 @@
 package com.example.takearest.controller;
 
 import com.example.takearest.entity.Restaurant;
+import com.example.takearest.exception.RestaurantNotFoundException;
 import com.example.takearest.service.api.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
-public class RestaurantRestController {
+@RequestMapping(value = "/api/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
 
-    @GetMapping("/api/restaurants")
+    @GetMapping
     public List<Restaurant> retrieveAll() {
         return restaurantService.retrieveAll();
     }
 
-    @PostMapping("/api/restaurants")
+    @PostMapping
     public void save(@RequestBody Restaurant restaurant) {
         restaurantService.save(restaurant);
     }
 
-    @GetMapping("/api/restaurants/{id}")
+    @GetMapping("{id}")
     public Restaurant getById(@PathVariable long id) {
         return restaurantService.getById(id)
                 .orElseThrow(() -> new RestaurantNotFoundException(id));
     }
 
-
-    @PostMapping("/api/restaurants/vote/{id}")
-    public void vote(@PathVariable long id, Principal principal) {
-        restaurantService.vote(id, principal.getName());
-    }
-
-    @PutMapping("/api/restaurants/{id}")
+    @PutMapping("{id}")
     public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable long id) {
         return restaurantService.getById(id)
                 .map(restaurant -> {
@@ -47,9 +43,10 @@ public class RestaurantRestController {
 
     }
 
-    @DeleteMapping("/api/restaurants/{id}")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable long id) {
         restaurantService.delete(id);
     }
+
 
 }

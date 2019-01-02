@@ -1,5 +1,6 @@
 package com.example.takearest.service.impl;
 
+import com.example.takearest.entity.Meal;
 import com.example.takearest.entity.Restaurant;
 import com.example.takearest.entity.User;
 import com.example.takearest.entity.Vote;
@@ -10,7 +11,9 @@ import com.example.takearest.service.api.RestaurantService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -41,53 +44,31 @@ public class RestaurantServiceImpl implements RestaurantService {
         return (List<Restaurant>) restaurants;
     }
 
-//    public Set<Meal> getMeals(Long restaurantId) {
-//        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(restaurantId);
-//
-//        return optionalRestaurant.get().getMeals();
+//    @Override
+//    public List<Meal> getMealsByRestaurant(long restaurantId) {
+//        return restaurantRepository.get;
 //    }
 
     @Override
-    public Optional<Restaurant> getById(Long restaurantId) {
-         return restaurantRepository.findById(restaurantId);
+    public Optional<Restaurant> getById(long restaurantId) {
+        return restaurantRepository.findById(restaurantId);
     }
 
     @Override
-    public Long getByName(String name) {
-        return restaurantRepository.findByName(name);
+    public Restaurant getByName(String name) {
+        return restaurantRepository.getByName(name);
     }
 
-    public Restaurant save(Restaurant restaurant){
+    @Override
+    @Transactional
+    public Restaurant save(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
-    public void delete(Long restaurantId){
+    @Override
+    @Transactional
+    public void delete(long restaurantId) {
         restaurantRepository.deleteById(restaurantId);
     }
 
-    public void updateRestaurant(Restaurant restaurant) {
-        restaurantRepository.save(restaurant);
-    }
-
-    public void vote(Long restaurantId, String username) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
-
-        LocalDateTime voteTime = LocalDateTime.now();
-        LocalTime tooLate = LocalTime.of(23,59,00);
-
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        //String formatDateTime = voteTime.format(formatter);
-
-        // if time is before 11  user can vote
-        System.out.println("VOTE HOUR "   + voteTime.getHour());
-        if (voteTime.toLocalTime().isBefore(tooLate) ) {
-            User user = userRepository.getByUsername(username);
-            Vote vote = new Vote();
-            vote.setDate(voteTime.toLocalDate());
-            vote.setRestaurant(restaurant);
-            vote.setUser(user);
-            voteRepository.save(vote);
-        } else log.info("too Late" );
-
-    }
 }

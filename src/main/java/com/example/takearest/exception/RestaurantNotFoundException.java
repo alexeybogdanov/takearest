@@ -1,8 +1,8 @@
-package com.example.takearest.controller;
+package com.example.takearest.exception;
 
 public class RestaurantNotFoundException extends RuntimeException {
 
-    RestaurantNotFoundException(long id) {
+   public RestaurantNotFoundException(long id) {
         super("Could not find restaurant " + id);
     }
 }
