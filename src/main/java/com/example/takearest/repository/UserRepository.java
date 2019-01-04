@@ -3,7 +3,9 @@ package com.example.takearest.repository;
 import com.example.takearest.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<User,Long> {
+import java.util.Optional;
 
-    User getByUsername(String name);
+public interface UserRepository extends CrudRepository<User, Long> {
+
+    Optional<User> getByUsername(String name);
 }

@@ -10,10 +10,10 @@ import com.example.takearest.service.api.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Service
 public class VoteServiceImpl implements VoteService {
@@ -34,21 +34,11 @@ public class VoteServiceImpl implements VoteService {
         LocalDateTime voteTime = LocalDateTime.now();
         LocalTime tooLate = LocalTime.of(22, 59, 00);
 
-//        User user = userRepository.getByUsername(username);
-//        Vote updatedVote = voteRepository.findById(id)
-//                .map(employee -> {
-//                    employee.setName(newEmployee.getName());
-//                    employee.setRole(newEmployee.getRole());
-//                    return repository.save(employee);
-//                })
-//                .orElseGet(() -> {
-//                    newEmployee.setId(id);
-//                    return repository.save(newEmployee);
-//                });
 
         // if time is before 11  user can vote
 
-        User user = userRepository.getByUsername(username);
+        //TODO
+        User user = userRepository.getByUsername(username).get();
         if (voteTime.toLocalTime().isBefore(tooLate)
                 && voteRepository.countByDateAndUser(voteTime.toLocalDate(), user) == 0) {
             Vote vote = new Vote();
@@ -56,10 +46,12 @@ public class VoteServiceImpl implements VoteService {
             vote.setRestaurant(restaurant);
             vote.setUser(user);
             voteRepository.save(vote);
-        } else  if ((voteTime.toLocalTime().isBefore(tooLate)
+        } else if ((voteTime.toLocalTime().isBefore(tooLate)
                 && voteRepository.countByDateAndUser(voteTime.toLocalDate(), user) == 1)) {
-            System.out.println("VOTE ========= " + voteRepository.findVoteByDateAndUser(voteTime.toLocalDate(), user).getId() );
-            Vote vote = voteRepository.findVoteByDateAndUser(voteTime.toLocalDate(), user);
+            //TODO
+            System.out.println("VOTE ========= " + voteRepository.findVoteByDateAndUser(voteTime.toLocalDate(), user).get().getId());
+            //TODO
+            Vote vote = voteRepository.findVoteByDateAndUser(voteTime.toLocalDate(), user).get();
             vote.setRestaurant(restaurant);
             voteRepository.save(vote);
         }
@@ -67,7 +59,7 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public Vote findVoteByDateAndUser(LocalDate date, User user) {
+    public Optional<Vote> findVoteByDateAndUser(LocalDate date, User user) {
         return voteRepository.findVoteByDateAndUser(date, user);
     }
 }

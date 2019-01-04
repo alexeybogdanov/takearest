@@ -55,7 +55,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant getByName(String name) {
+    public Optional<Restaurant> getByName(String name) {
         return restaurantRepository.getByName(name);
     }
 

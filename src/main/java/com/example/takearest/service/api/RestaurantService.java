@@ -17,7 +17,7 @@ public interface RestaurantService {
 
     Optional<Restaurant> getById(long restaurantId);
 
-    Restaurant getByName(String name);
+    Optional<Restaurant> getByName(String name);
 
     Restaurant save(Restaurant restaurant);
 
