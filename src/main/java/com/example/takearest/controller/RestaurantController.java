@@ -2,58 +2,82 @@ package com.example.takearest.controller;
 
 import com.example.takearest.entity.Restaurant;
 import com.example.takearest.exception.RestaurantNotFoundException;
-import com.example.takearest.service.api.RestaurantService;
+import com.example.takearest.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.List;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/api/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(RestaurantController.REST_URL)
 public class RestaurantController {
 
+    static final String REST_URL = "/api/restaurants";
+
+    private final RestaurantRepository restaurantRepository;
+
     @Autowired
-    private RestaurantService restaurantService;
-
-    @GetMapping
-    public List<Restaurant> retrieveAll() {
-        return restaurantService.retrieveAll();
-    }
-
-    @PostMapping
-    public void save(@RequestBody Restaurant restaurant) {
-        restaurantService.save(restaurant);
+    public RestaurantController(RestaurantRepository restaurantRepository) {
+        this.restaurantRepository = restaurantRepository;
     }
 
     @GetMapping("{id}")
-    public Resource<Restaurant> getById(@PathVariable long id) {
-        Restaurant restaurant = restaurantService.getById(id)
+    public ResponseEntity<Restaurant> find(@PathVariable long id) {
+        return restaurantRepository.findById(id)
+                .map(restaurant -> new ResponseEntity<>(restaurant, HttpStatus.OK))
                 .orElseThrow(() -> new RestaurantNotFoundException(id));
-        return new Resource<>(restaurant,
-                linkTo(methodOn(RestaurantController.class).getById(id)).withSelfRel(),
-                linkTo(methodOn(RestaurantController.class).retrieveAll()).withRel("restaurants"));
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<Restaurant> save(@RequestBody Restaurant restaurant) {
+        Restaurant newRestaurant = restaurantRepository.save(restaurant);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(newRestaurant.getId()).toUri();
+
+        return ResponseEntity
+                .created(uriOfNewResource)
+                .body(newRestaurant);
+
     }
 
     @PutMapping("{id}")
-    public Restaurant update(@RequestBody Restaurant newRestaurant, @PathVariable long id) {
-        return restaurantService.getById(id)
+    @Transactional
+    public ResponseEntity<Restaurant> update(@RequestBody Restaurant newRestaurant, @PathVariable long id) {
+        Restaurant updatedRestaurant = restaurantRepository.findById(id)
                 .map(restaurant -> {
                     restaurant.setName(newRestaurant.getName());
-                    return restaurantService.save(restaurant);
+                    return restaurantRepository.save(restaurant);
                 })
-                .orElseThrow(() -> new RestaurantNotFoundException(id));
+                .orElseGet(() -> {
+                    newRestaurant.setId(id);
+                    return restaurantRepository.save(newRestaurant);
+                });
 
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(updatedRestaurant.getId()).toUri();
+
+        return ResponseEntity
+                .created(uriOfNewResource)
+                .body(updatedRestaurant);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable long id) {
-        restaurantService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        restaurantRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
+    @GetMapping
+    public Iterable<Restaurant> all() {
+        return restaurantRepository.findAll();
+    }
 
 }

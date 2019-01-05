@@ -6,36 +6,45 @@ import com.example.takearest.entity.Vote;
 import com.example.takearest.repository.RestaurantRepository;
 import com.example.takearest.repository.UserRepository;
 import com.example.takearest.service.api.VoteService;
-import com.example.takearest.to.RestaurantMenuTo;
+import com.example.takearest.service.impl.VoteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping(value = "/api/vote", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(VoteController.REST_URL)
 public class VoteController {
 
-    @Autowired
-    VoteService voteService;
+    static final String REST_URL = "/api/vote";
 
-    //TODO
-    @Autowired
-    UserRepository userRepository;
+    private final VoteService voteService;
+
+    private final UserRepository userRepository;
+
+    private final RestaurantRepository restaurantRepository;
 
     @Autowired
-    RestaurantRepository restaurantRepository;
+    public VoteController(VoteService voteService, UserRepository userRepository, RestaurantRepository restaurantRepository) {
+        this.voteService = voteService;
+        this.userRepository = userRepository;
+        this.restaurantRepository = restaurantRepository;
+    }
 
     @PutMapping("{id}")
-    public void vote(@PathVariable long id, Principal principal) {
-        voteService.vote(id, principal.getName());
+    public ResponseEntity<?> vote(@PathVariable long id, Principal principal) {
+        VoteServiceImpl.CustomVote newVote = voteService.vote(id, principal.getName());
+        return newVote != null ? new ResponseEntity<>(newVote.getVote().getRestaurant(), newVote.getStatus())
+                : new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+
     }
 
     @GetMapping("search")
-    public RestaurantMenuTo getByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date, Principal principal) {
+    public Restaurant getByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date, Principal principal) {
         //TODO
         User user = userRepository.getByUsername(principal.getName()).get();
         Vote vote = voteService.findVoteByDateAndUser(date, user).get();
@@ -43,6 +52,6 @@ public class VoteController {
         System.out.println("------------------> rest name  = " + vote.getRestaurant().getName());
         //TODO
         Restaurant restaurant = restaurantRepository.getByName(vote.getRestaurant().getName()).get();
-        return RestaurantMenuTo.builder().restaurant(restaurant).meals(restaurant.getMeals()).build();
+        return restaurant;
     }
 }

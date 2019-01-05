@@ -1,7 +1,7 @@
 curl -H "Authorization: Basic YWxleDoxMjM0NQ==" http://localhost:8080/api/restaurants
 
 //create restaurant
-curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" \
+curl -v -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" \
   --request POST \
   --data '{"name":"CURLfood"}' \
   http://localhost:8080/api/restaurants
@@ -10,37 +10,25 @@ curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: applicat
 //create food-1 for restaurant
 curl -H "Authorization: Basic YWxleDoxMjM0NQ==" --header "Content-Type: application/json" \
   --request POST \
-  --data '{"name":"CURLhamburger","price":3.0,"restaurant_id":3}' \
-  http://localhost:8080/api/meals
-
-//create food-2 for restaurant
-curl -v --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"name":"CURLcola","price":1.99,"restaurant_id":3}' \
-  http://localhost:8080/api/meals
-
-//create food-3 for restaurant
-curl -v --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"name":"CURLpotato","price":2.99,"restaurant_id":3}' \
+  --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}' \
   http://localhost:8080/api/meals
 
 //Delete food
-curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X DELETE localhost:8080/api/meals/7
+curl -v -H "Authorization: Basic YWxleDoxMjM0NQ==" -X DELETE localhost:8080/api/meals/1
 
 
 //Update food
-curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/meals/1 -H 'Content-type:application/json' -d '{"name": "THIS IS UPDATED FOOD"}'
+curl -v -H "Authorization: Basic YWxleDoxMjM0NQ==" -X POST localhost:8080/api/meals/1 -H 'Content-type:application/json' -d '{"name": "THIS IS UPDATED FOOD","price":3.5}'
 
 //get food by date
 curl 'http://localhost:8080/api/vote/search/?date=2019-01-02' -i -H'Authorization:Basic YWxleDoxMjM0NQ=='
 
 
 //vote for restaurant
-curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/vote/1 -H 'Content-type:application/json'
+curl -v -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/vote/1 -H 'Content-type:application/json'
 
 //Update restaurant
-curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/restaurants/1 -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee"}'
+curl -v -H "Authorization: Basic YWxleDoxMjM0NQ==" -X PUT localhost:8080/api/restaurants/1 -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee"}'
 
 //Delete restaurant
 curl -H "Authorization: Basic YWxleDoxMjM0NQ==" -X DELETE localhost:8080/api/restaurants/3
