@@ -54,8 +54,9 @@ http://localhost:8080/h2
 
     `curl -v 'http://localhost:8080/api/restaurants' -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-Type:    application/json' -X POST  --data '{"name":"CURLrestaurant"}'` 
     
-* Find restaurant by name    
-curl 'http://localhost:8080/api/restaurants/search/by-name?name=MacDac' -i -H'Authorization:Basic YWRtaW46cGFzc3dvcmQ='    
+* Find restaurant by name 
+
+`curl 'http://localhost:8080/api/restaurants/search/by-name?name=MacDac' -H 'Authorization:Basic YWRtaW46cGFzc3dvcmQ='`    
     
 * Modify restaurant (Only admin allowed)
 
@@ -101,5 +102,5 @@ curl 'http://localhost:8080/api/restaurants/search/by-name?name=MacDac' -i -H'Au
 
 * Search vote in history by date 
 
-    `curl -v 'http://localhost:8080/api/vote/search/by-date?date=2018-12-23' -H'Authorization:Basic dXNlcjoxMjM0NQ=='`
+    `curl -v 'http://localhost:8080/api/vote/search/by-date?date=2018-12-23' -H 'Authorization:Basic dXNlcjoxMjM0NQ=='`
 
