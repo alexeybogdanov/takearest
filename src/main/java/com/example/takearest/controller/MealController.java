@@ -7,6 +7,7 @@ import com.example.takearest.repository.MealRepository;
 import com.example.takearest.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,6 +31,7 @@ public class MealController {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<Meal> save(@RequestBody Meal meal) {
         if (!restaurantRepository.findById(meal.getRestaurant().getId()).isPresent()) {
             throw new RestaurantNotFoundException(meal.getRestaurant().getId());
@@ -48,6 +50,7 @@ public class MealController {
     }
 
     @PostMapping("{id}")
+    @Transactional
     public ResponseEntity<Meal> update(@RequestBody Meal newMeal, @PathVariable long id) {
         Meal updatedMeal = mealRepository.findById(id)
                 .map(meal -> {
@@ -68,6 +71,9 @@ public class MealController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {
+        if (!mealRepository.findById(id).isPresent()) {
+            throw new MealNotFoundException(id);
+        }
         mealRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

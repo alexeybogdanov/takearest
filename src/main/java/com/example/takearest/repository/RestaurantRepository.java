@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface RestaurantRepository extends CrudRepository<Restaurant, Long> {
 
-    Optional<Restaurant> getByName(String name);
+    Optional<Restaurant> findByName(String name);
 
 }

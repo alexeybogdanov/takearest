@@ -11,8 +11,9 @@ import javax.persistence.Table;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="users")
+@Table(name = "users")
 public class User {
+
     @Id
     private String username;
 
@@ -21,4 +22,5 @@ public class User {
 
     @Column
     private boolean enabled;
+
 }

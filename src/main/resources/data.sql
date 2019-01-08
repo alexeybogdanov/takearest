@@ -10,22 +10,26 @@ CREATE TABLE IF NOT EXISTS AUTHORITIES (
       create unique index ix_auth_username on authorities (username,authority);
 
 INSERT INTO USERS(username, password, enabled) VALUES
-('alex','$2a$04$Y/bW10aytUgRdeizHs9EV.fJ4GPLam/VD6j8VJb6Mcfy9qhTEzjjG', 1),
-('admin','$2a$04$Y/bW10aytUgRdeizHs9EV.fJ4GPLam/VD6j8VJb6Mcfy9qhTEzjjG', 1);
+('user','$2a$04$Y/bW10aytUgRdeizHs9EV.fJ4GPLam/VD6j8VJb6Mcfy9qhTEzjjG', 1),
+('admin','$2a$10$7MvpYuwhXJk24bEbqdzCfewpAIu5Lj.mQMVFQmPSF5ZkE1O.C5Yxq', 1);
+
 
 INSERT INTO AUTHORITIES VALUES
-('alex','USER'),
-('admin','ADMIN');
+('user','ROLE_USER'),
+('admin','ROLE_ADMIN');
 
 
-INSERT INTO RESTAURANT(ID, NAME) VALUES
-(1, 'MacDac'),
-(2, 'Shawerma');
+INSERT INTO RESTAURANT(NAME) VALUES
+('MacDac'),
+('Shawerma');
 
-INSERT INTO MEAL(ID, NAME, PRICE, TIMESTAMP, RESTAURANT_ID) VALUES
-(1, 'cola', 1.99, '2018-12-23', 1),
-(2, 'hamburger', 3.0, '2018-12-23', 1),
-(3, 'potato', 2.99, '2018-12-23', 1),
-(4, 'cola-light', 1.99, '2018-12-23', 2),
-(5, 'hamburger-light', 3.0, '2018-12-23', 2),
-(6, 'potato-light', 2.99, '2018-12-23', 2);
+INSERT INTO MEAL(NAME, PRICE, TIMESTAMP, RESTAURANT_ID) VALUES
+('cola', 1.99, '2018-12-23', 1),
+('hamburger', 3.0, '2018-12-23', 1),
+('potato', 2.99, '2018-12-23', 1),
+('cola-light', 1.99, '2018-12-23', 2),
+('hamburger-light', 3.0, '2018-12-23', 2),
+('potato-light', 2.99, '2018-12-23', 2);
+
+INSERT INTO VOTE(VOTE_DATE, RESTAURANT_ID, USER_NAME) VALUES
+('2018-12-23', 1, 'user');

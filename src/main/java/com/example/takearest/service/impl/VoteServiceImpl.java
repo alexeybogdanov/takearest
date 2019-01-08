@@ -10,11 +10,11 @@ import com.example.takearest.repository.VoteRepository;
 import com.example.takearest.service.api.VoteService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,6 +39,7 @@ public class VoteServiceImpl implements VoteService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public CustomVote vote(long restaurantId, String username) {
         LocalDateTime voteTime = LocalDateTime.now();
 

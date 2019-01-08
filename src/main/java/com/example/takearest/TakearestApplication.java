@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TakearestApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TakearestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TakearestApplication.class, args);
+    }
 }
