@@ -89,9 +89,11 @@ http://localhost:8080/h2
 ## Vote handling
 
 * Vote for restaurant (Only user allowed)
+
     `curl -v localhost:8080/api/vote/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" -X PUT -H 'Content-type:application/json'`
     
-* Vote for restaurant (Check access denied for admin) 
+* Vote for restaurant (Check access denied for admin)
+
     `curl -v localhost:8080/api/vote/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X PUT -H 'Content-type:application/json'`    
 
 
