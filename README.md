@@ -43,32 +43,35 @@ http://localhost:8080/h2
 
 * List all restaurants (http://localhost:8080/api/restaurants)
 
-    `curl http://localhost:8080/api/restaurants -H "Authorization: Basic dXNlcjoxMjM0NQ=="`
+    `curl -v http://localhost:8080/api/restaurants -H "Authorization: Basic dXNlcjoxMjM0NQ=="`
  
 
 * Display particular restaurant (http://localhost:8080/api/restaurants/1)
 
-    `curl http://localhost:8080/api/restaurants/2 -H "Authorization: Basic dXNlcjoxMjM0NQ=="`
+    `curl -v http://localhost:8080/api/restaurants/2 -H "Authorization: Basic dXNlcjoxMjM0NQ=="`
     
 * Create restaurant (Only admin allowed)
 
-    `curl 'http://localhost:8080/api/restaurants' -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-Type:             application/json' --request POST  --data '{"name":"CURLrestaurant"}'` 
+    `curl -v 'http://localhost:8080/api/restaurants' -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-Type:    application/json' --request POST  --data '{"name":"CURLrestaurant"}'` 
     
 * Modify restaurant (Only admin allowed)
 
-    `curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ="  --header 'Content-type:application/json' --request PUT --data '{"name": "KFC"}'`
+    `curl -v http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ="  --header 'Content-type:application/json' --request PUT --data '{"name": "KFC"}'`
      
 
 * Delete restaurant (Only admin allowed)
 
-    `curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
+    `curl -v http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
    
 * Delete restaurant (Check access denied for user)  
 
-    `curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" -X DELETE`
+    `curl -v http://localhost:8080/api/restaurants/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" -X DELETE`
 
 ## Meal handling
 
-* create meal for restaurant 
-    `curl http://localhost:8080/api/meals -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header "Content-Type:                   application/json" --request POST  --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}'`
+* Create meal for restaurant (Only admin allowed)
+
+    `curl -v http://localhost:8080/api/meals -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header "Content-Type:           application/json" --request POST  --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}'`
   
+* Delete meal (Only admin allowed)
+`curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWxleDoxMjM0NQ==" -X DELETE`
