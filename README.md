@@ -52,11 +52,11 @@ http://localhost:8080/h2
     
 * Create restaurant (Only admin allowed)
 
-    `curl -v 'http://localhost:8080/api/restaurants' -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-Type:    application/json' --request POST  --data '{"name":"CURLrestaurant"}'` 
+    `curl -v 'http://localhost:8080/api/restaurants' -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-Type:    application/json' -X POST  --data '{"name":"CURLrestaurant"}'` 
     
 * Modify restaurant (Only admin allowed)
 
-    `curl -v http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ="  --header 'Content-type:application/json' --request PUT --data '{"name": "KFC"}'`
+    `curl -v http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ="  --header 'Content-type:application/json' -X PUT --data '{"name": "KFC"}'`
      
 
 * Delete restaurant (Only admin allowed)
@@ -71,17 +71,24 @@ http://localhost:8080/h2
 
 * Create meal for restaurant (Only admin allowed)
 
-    `curl -v http://localhost:8080/api/meals -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-Type:           application/json' --request POST  --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}'`
+    `curl -v http://localhost:8080/api/meals -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-Type:           application/json' -X POST --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}'`
   
 * Update meal (Only admin allowed)
 
-    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-type:application/json' --request POST --data '{"name": "NEW_NAME","price":3.5}'`
+    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-type:application/json' -X POST --data '{"name": "NEW_NAME","price":3.5}'`
     
 * Update meal (Check access denied for user)
 
-    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" --header 'Content-type:application/json' --request POST --data '{"name": "NEW_NAME","price":3.5}'`    
+    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" --header 'Content-type:application/json' -X POST --data '{"name": "NEW_NAME","price":3.5}'`    
   
   
 * Delete meal (Only admin allowed)
 
     `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
+    
+## Vote handling
+
+* Vote for restaurant
+    `curl -v localhost:8080/api/vote/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X PUT -H 'Content-type:application/json'`
+
+
