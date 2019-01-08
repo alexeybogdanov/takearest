@@ -98,5 +98,5 @@ http://localhost:8080/h2
 
 * Search vote in history by date 
 
-`curl -v 'http://localhost:8080/api/vote/search/by-date/?date=2019-01-05' -H'Authorization:Basic dXNlcjoxMjM0NQ=='`
+`curl -v 'http://localhost:8080/api/vote/search/by-date/?date=2018-12-23' -H'Authorization:Basic dXNlcjoxMjM0NQ=='`
 
