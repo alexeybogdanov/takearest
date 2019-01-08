@@ -20,9 +20,11 @@ Each restaurant provides new menu each day.
 
 ### Users:
 * admin/password 
+
 Authorization: Basic YWRtaW46cGFzc3dvcmQ=
 
 * user/12345
+
 Authorization: Basic dXNlcjoxMjM0NQ==
 
 ### H2 DB access:
