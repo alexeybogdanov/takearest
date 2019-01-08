@@ -75,7 +75,7 @@ http://localhost:8080/h2
   
 * Update meal (Only admin allowed)
 
-    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-type:application/json' -X --data '{"name": "NEW_NAME","price":3.5}'`
+    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header 'Content-type:application/json' --request POST --data '{"name": "NEW_NAME","price":3.5}'`
     
 * Update meal (Check access denied for user)
 
