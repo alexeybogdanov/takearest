@@ -18,4 +18,14 @@ Build a voting system for deciding where to have lunch.
 
 Each restaurant provides new menu each day.
 
-As a result, provide a link to github repository.
+### Users:
+* admin/password 
+Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+
+* user/12345
+Authorization: Basic dXNlcjoxMjM0NQ==
+
+### H2DB access:
+http://localhost:8080/h2
+username: sa
+without password
