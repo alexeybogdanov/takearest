@@ -18,13 +18,13 @@ Build a voting system for deciding where to have lunch.
 
 Each restaurant provides new menu each day.
 
-### Install and run:
+### Install and run
 
 git clone https://github.com/alexeybogdanov/takearest
 
 $ mvn spring-boot:run (from project directory)
 
-### Users:
+### Users
 * admin/password 
 
 Authorization: Basic YWRtaW46cGFzc3dvcmQ=
@@ -33,8 +33,21 @@ Authorization: Basic YWRtaW46cGFzc3dvcmQ=
 
 Authorization: Basic dXNlcjoxMjM0NQ==
 
-### H2 DB access:
+### H2 DB access
 http://localhost:8080/h2
 
 * username: sa
 * without password
+
+### Restaurant handling 
+
+* List all restaurants
+
+ curl http://localhost:8080/api/restaurants -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
+ 
+
+* Display particular restaurant
+
+curl http://localhost:8080/api/restaurants/2 -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
+
+
