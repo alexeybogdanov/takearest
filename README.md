@@ -74,4 +74,5 @@ http://localhost:8080/h2
     `curl -v http://localhost:8080/api/meals -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header "Content-Type:           application/json" --request POST  --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}'`
   
 * Delete meal (Only admin allowed)
-`curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWxleDoxMjM0NQ==" -X DELETE`
+
+`curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
