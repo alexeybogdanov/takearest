@@ -41,14 +41,14 @@ http://localhost:8080/h2
 
 ### Restaurant handling 
 
-* List all restaurants
+* List all restaurants (http://localhost:8080/api/restaurants)
 
-    curl http://localhost:8080/api/restaurants -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
+    `curl http://localhost:8080/api/restaurants -H "Authorization: Basic dXNlcjoxMjM0NQ=="`
  
 
-* Display particular restaurant
+* Display particular restaurant (http://localhost:8080/api/restaurants/1)
 
-    curl http://localhost:8080/api/restaurants/2 -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
+    `curl http://localhost:8080/api/restaurants/2 -H "Authorization: Basic dXNlcjoxMjM0NQ=="`
     
 * Create restaurant (Only admin allowed)
 
@@ -56,5 +56,5 @@ http://localhost:8080/h2
 
 * Delete restaurant (Only admin allowed)
 
-    ```curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE```
+    `curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
 
