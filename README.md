@@ -73,6 +73,13 @@ http://localhost:8080/h2
 
     `curl -v http://localhost:8080/api/meals -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header "Content-Type:           application/json" --request POST  --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}'`
   
+* Update meal (Only admin allowed)
+    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header'Content-type:application/json' --request POST --data '{"name": "THIS IS UPDATED FOOD NAME","price":3.5}'`
+    
+* Update meal (Check access denied for user)
+    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" --header'Content-type:application/json' --request POST --data '{"name": "THIS IS UPDATED FOOD NAME","price":3.5}'`    
+  
+  
 * Delete meal (Only admin allowed)
 
     `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
