@@ -43,11 +43,16 @@ http://localhost:8080/h2
 
 * List all restaurants
 
- curl http://localhost:8080/api/restaurants -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
+    curl http://localhost:8080/api/restaurants -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
  
 
 * Display particular restaurant
 
-curl http://localhost:8080/api/restaurants/2 -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
+    curl http://localhost:8080/api/restaurants/2 -H "Authorization: Basic dXNlcjoxMjM0NQ==" 
+    
+* Create restaurant (Only admin allowed)
+
+curl http://localhost:8080/api/restaurants -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header "Content-Type: application/json" --request POST  --data '{"name":"CURLrestaurant"}' 
+
 
 
