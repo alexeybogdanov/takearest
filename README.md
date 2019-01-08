@@ -39,7 +39,7 @@ http://localhost:8080/h2
 * username: sa
 * without password
 
-### Restaurant handling 
+## Restaurant handling 
 
 * List all restaurants (http://localhost:8080/api/restaurants)
 
@@ -65,5 +65,10 @@ http://localhost:8080/h2
    
 * Delete restaurant (Check access denied for user)  
 
-`curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" -X DELETE`
+    `curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" -X DELETE`
 
+## Meal handling
+
+* create meal for restaurant 
+    `curl http://localhost:8080/api/meals -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header "Content-Type:                   application/json" --request POST  --data '{"name":"CURLhamburger","price":3.0,"restaurant": {"id":2, "name":"Shawerma"}}'`
+  
