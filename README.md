@@ -27,5 +27,6 @@ Authorization: Basic dXNlcjoxMjM0NQ==
 
 ### H2 DB access:
 http://localhost:8080/h2
--username: sa
--without password
+
+* username: sa
+* without password
