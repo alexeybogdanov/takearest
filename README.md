@@ -62,4 +62,8 @@ http://localhost:8080/h2
 * Delete restaurant (Only admin allowed)
 
     `curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
+   
+* Delete restaurant (Check access denied for user)  
+
+`curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic dXNlcjoxMjM0NQ==" -X DELETE`
 
