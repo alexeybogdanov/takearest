@@ -96,4 +96,7 @@ http://localhost:8080/h2
 
     `curl -v localhost:8080/api/vote/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X PUT -H 'Content-type:application/json'`    
 
+* Search vote in history by date 
+
+`curl -v 'http://localhost:8080/api/vote/search/by-date/?date=2019-01-05' -H'Authorization:Basic dXNlcjoxMjM0NQ=='`
 
