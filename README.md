@@ -55,5 +55,5 @@ http://localhost:8080/h2
     curl 'http://localhost:8080/api/restaurants' -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" --header "Content-Type:             application/json" --request POST  --data '{"name":"CURLrestaurant"}' 
 
 * Delete restaurant (Only admin allowed)
-    '''curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE''' 
+    ```curl http://localhost:8080/api/restaurants/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE```
 
