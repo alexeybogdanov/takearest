@@ -56,7 +56,7 @@ http://localhost:8080/h2
     
 * Find restaurant by name 
 
-`curl 'http://localhost:8080/api/restaurants/search/by-name?name=MacDac' -H 'Authorization:Basic YWRtaW46cGFzc3dvcmQ='`    
+    `curl -v 'http://localhost:8080/api/restaurants/search/by-name?name=MacDac' -H 'Authorization:Basic YWRtaW46cGFzc3dvcmQ='`    
     
 * Modify restaurant (Only admin allowed)
 
