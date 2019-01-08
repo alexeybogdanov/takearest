@@ -75,4 +75,4 @@ http://localhost:8080/h2
   
 * Delete meal (Only admin allowed)
 
-`curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
+    `curl -v http://localhost:8080/api/meals/1 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ=" -X DELETE`
