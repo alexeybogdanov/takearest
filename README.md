@@ -18,6 +18,12 @@ Build a voting system for deciding where to have lunch.
 
 Each restaurant provides new menu each day.
 
+### Install and run:
+
+git clone https://github.com/alexeybogdanov/takearest
+
+$ mvn spring-boot:run (from project directory)
+
 ### Users:
 * admin/password 
 
