@@ -22,6 +22,7 @@ import java.time.LocalTime;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class VoteServiceImpl implements VoteService {
 
     private static final LocalTime EXPIRATION_TIME = LocalTime.of(22, 59, 00);
