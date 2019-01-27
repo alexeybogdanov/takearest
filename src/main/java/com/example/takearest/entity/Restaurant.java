@@ -1,5 +1,6 @@
 package com.example.takearest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class Restaurant {
     private String name;
 
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "restaurant",fetch =FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<Meal> meals;
